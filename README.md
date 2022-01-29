@@ -1,6 +1,6 @@
 # Shatranj Bot
 
-Shatranj is the predecessor to chess and was played in the Sassanian Empire some 1200 years ago. While chess engines have been throughly developed in the past decades, shatranj remains largely unexplored. This project is a rudimentary shatranj bot in node.js that plays at the equivalent of a club level in chess.
+Shatranj is the predecessor to chess and was played in the Sassanian Empire some 1200 years ago. While chess engines have been throughly developed in the past decades, shatranj remains largely unexplored. This project is a rudimentary shatranj bot in node.js that plays at the equivalent of a club level in chess. Created from 09/21-10/21.
 
 I have also separately created a chess bot: https://lichess.org/@/Pulsar64
 
