@@ -32,6 +32,8 @@ class Board {
             hashArray: [],
             captured: 0
         }
+        
+        this.startingPosition();
     }
 
     static pieceValues = {
