@@ -8,7 +8,7 @@ class Board {
         this.zobristTable = [[[]]];
         this.initZobrist();
 
-        // bitboards
+        // board arrays
         this.Boards = {
             white : Board.createEmptyBoard(),
             black : Board.createEmptyBoard(),
@@ -20,7 +20,7 @@ class Board {
             pawn: Board.createEmptyBoard()
         },
 
-        // additional bitboard:
+        // additional board array:
         // this.occupied;
         // for all occupied squares (white union black)
 
@@ -142,7 +142,7 @@ class Board {
     }
 
     // Creates and returns an axb array filled with data
-    // Default is the bitboard
+    // Default is the empty board array
     // @param   a       number of rows
     // @param   b       number of columns
     // @param   data    text that fills the array
@@ -155,7 +155,7 @@ class Board {
         return arr;
     }
 
-    // Bitboard that represents all occupied squares
+    // board array that represents all occupied squares
     get occupied() {
         const arr = Board.createEmptyBoard();
         for (let i = 0; i < 8; i ++) {
@@ -173,7 +173,7 @@ class Board {
         this.info.sideToMove = side;
     }
 
-    // Updates bitboards with starting position
+    // Updates board arrays with starting position
     startingPosition() {
         this.Boards.white[0].fill(1);
         this.Boards.white[1].fill(1);
@@ -196,7 +196,7 @@ class Board {
         return;
     }
 
-    // Clears all bitboards
+    // Clears all board arrays
     clearBoard() {
         for (let board in this.Boards) {
             this.Boards[board].forEach(e => e.fill(0));
@@ -286,7 +286,7 @@ class Board {
     }
 
     // MOVE:
-    // Changes bitboards, moves array, player to move
+    // Changes board arrays, moves array, player to move
     // Returns a move object
     // @param   start       string, algebraic notation of starting square
     //                      alternate: start and end algebraic concatenated
@@ -313,7 +313,7 @@ class Board {
 
         const capture = this.squareContents(endC); // can be 0 if no capture
 
-        // adjust bitboards
+        // adjust board arrays
         if (capture !== 0) {
             this.Boards[capture[0]][endC[0]][endC[1]] = 0;
             this.Boards[capture[1]][endC[0]][endC[1]] = 0;
@@ -358,7 +358,7 @@ class Board {
     }
 
     // UNDO:
-    // Changes bitboards, moves array, and player to move
+    // Changes board arrays, moves array, and player to move
     // Returns array of move objects for removed moves
     // @param   num     number of moves to undo
     undo(num = 1) {
@@ -370,13 +370,13 @@ class Board {
             let startC = Board.getCoordinates(obj.start);
             let endC = Board.getCoordinates(obj.end);
 
-            // bitboards for moving player
+            // board arrays for moving player
             this.Boards[obj.color][endC[0]][endC[1]] = 0;
             this.Boards[obj.color][startC[0]][startC[1]] = 1;
             this.Boards[obj.piece][endC[0]][endC[1]] = 0;
             this.Boards[obj.piece][startC[0]][startC[1]] = 1;
 
-            // other bitboards to adjust
+            // other board arrays to adjust
             if (obj.promotion) this.Boards.ferz[endC[0]][endC[1]] = 0;
             if (obj.captured) {
                 this.Boards[obj.captured][endC[0]][endC[1]] = 1;
