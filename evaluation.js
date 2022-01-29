@@ -302,6 +302,7 @@ class Engine extends Board {
             let later = new Date().getTime();
             let timeRatio = (this.info.captured > .6 * 69.2) ? .6 : .3;
             if (later - now > timeRatio*targetTime*1000) {
+                // if not enough time left, don't go to next ply move
                 // console.log('depth ' + i);
                 console.log(later - now);
                 break;
@@ -328,7 +329,6 @@ class Engine extends Board {
         return this.iterativeDeepening(targetDepth)[1];
     }
 
-    // Smart Engine Functionality
     // Self game: plays a game against itself at a specified search depth
     selfgame(depth, trueDepthLimit = 100, targetTime = 15) {
         let str = '';
